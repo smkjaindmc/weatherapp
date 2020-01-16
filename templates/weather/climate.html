@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .climate{
+            height: 120px;
+            width: 100%;
+            background-color: blueviolet;
+        }
+        h3{
+           color: whitesmoke; 
+           padding-top: 40px;
+        }
+        form{
+            text-align: center;
+            margin-top: 50px;
+        }
+        .cardo{
+           width:20%;
+          border: 2px solid grey;
+          border-radius: 4px;;
+          text-align: center;
+          margin-top: 40px;
+          margin-left: 600px;;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="climate">
+        <div class="container">
+        <h3>What's the weather like?</h3>
+        </div>
+        </div>
+        <form class="pop" method="POST">
+           {% csrf_token %}
+            {{ form.name }}
+            <button type="submit" class="btn btn-primary">Add city</button>
+        </form>
+       {% for weather_data in weather_data %}
+       <div class="cardo">
+           <h5> <img src="http://openweathermap.org/img/w/{{ weather_data.icon }}.png" alt="Image">     {{weather_data.city}}</h5>
+           <h6>{{weather_data.temperature}} F</h6>
+           <p>{{weather_data.description}}</p>
+       </div>
+        {% endfor %}  
+</body>
+</html>
